@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Africa Trivia</title>
+    </head>
+    <style>
+    </style>
+    <body>
+        <h1>Africa Trivia Game</h1>
+    </body>
+    <script>
+        var questions = [
+            {
+                prompt: 'There are over 50 countries in Africa',
+                answer: true
+            },
+            {
+                prompt: 'Africa is the largest continent in the world',
+                answer: false
+            },
+            {
+                prompt: 'The population of Nigeria is over 150 million',
+                answer: true
+            }
+        ]
+        var currentQuestion = 0;
+        var score = 0;
+        // CREATE NEW ELEMENTS FOR QUESTION PROMPT AND ANSWER BUTTONS
+        var question = document.createElement('div')
+        question.innerHTML = questions[currentQuestion].prompt
+        var falseBtn = document.createElement('button')
+        falseBtn.innerHTML = 'FALSE'
+        var trueBtn = document.createElement('button')
+        trueBtn.innerHTML = 'TRUE'
+        var body = document.querySelector('body')
+        function submitAnswer(answer) {
+            // CHECK IF FALSE IS CORRECT
+            var correctAnswer = questions[currentQuestion].answer
+            if (correctAnswer === answer) {
+               alert('Yeppers you're right!') 
+                // ADD A POINT TO THE SCORE
+                score++;
+            } else {
+                alert('Wrong answer!')
+            }
+            // UPDATE CURRENTQUESTION INDEX TO POINT TO NEXT QUESTION
+            // IF NOT LAST QUESTION
+            if (currentQuestion < questions.length -1) {
+                currentQuestion++;
+                // UPDATE THE QUESTION PROMPT TO BE NEXT QUESTION
+                question.innerHTML = questions[currentQuestion].prompt
+            } else {
+                alert('GAME OVER. YOUR SCORE IS ' + score)
+            }
+        }
+        // ADD EVENT LISTENERS FOR WHEN AN ANSWER BTN IS CLICKED
+        falseBtn.addEventListener('click', () => submitAnswer(false))
+        trueBtn.addEventListener('click', () => submitAnswer(true))
+        // ADD NEW QUESTION ELEMENTS TO HTML
+        body.append(question)
+        body.append(falseBtn)
+        body.append(trueBtn)
+    </script>
+</html>
